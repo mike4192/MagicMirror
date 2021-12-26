@@ -141,22 +141,22 @@ let config = {
 		{
 			module: 'MMM-WebView',
 			position: 'bottom_center',
-			classes: 'always',
+			classes: 'mike',
 			config: {
 			  url: 'https://www.wunderground.com/forecast/us/ma/arlington/42.42,-71.17',
 			  width: '950px',
-			  height: '680px',
-			  loadedJS: 'scroll(0,420)',
+			  height: '410px',
+			  loadedJS: 'scroll(0,460);',
 			  autoRefresh: true,
-			  autoRefreshInterval: 60*1000
+			  autoRefreshInterval: 3*60*60*1000
 			},
 		},
 		{
 			module: 'MMM-Face-Reco-DNN',
 			config: {
-			  // Logout 15 seconds after user was not detected any more
+			  // Logout some seconds after user was not detected any more
 			  // If they are detected within this period, the delay will start again
-			  logoutDelay: 5000,
+			  logoutDelay: 10000,
 			  // How often the recognition starts in milliseconds
 			  // With a Raspberry Pi 3+ it works well every 2 seconds
 			  checkInterval: 2000,
