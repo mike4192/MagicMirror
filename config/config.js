@@ -70,6 +70,7 @@ let config = {
 			position: "top_left",
 			classes: 'always',
 			config: {
+				maximmEntries: 4,
 				calendars: [
 					{
 						symbol: "calendar-check",
@@ -125,8 +126,9 @@ let config = {
 				],
 				showSourceTitle: true,
 				showPublishDate: true,
-				broadcastNewsFeeds: true,
-				broadcastNewsUpdates: true
+				broadcastNewsFeeds: false,
+				broadcastNewsUpdates: false,
+				reloadInterval: 7200000
 			}
 		},
 		{
@@ -156,10 +158,10 @@ let config = {
 			config: {
 			  // Logout some seconds after user was not detected any more
 			  // If they are detected within this period, the delay will start again
-			  logoutDelay: 10000,
+			  logoutDelay: 20000,
 			  // How often the recognition starts in milliseconds
 			  // With a Raspberry Pi 3+ it works well every 2 seconds
-			  checkInterval: 2000,
+			  checkInterval: 1000,
 			  // Module set used for when there is no face detected ie no one is in front of the camera
 			  noFaceClass: 'noface',
 			  // Module set used for when there is an unknown/unrecognised face detected
