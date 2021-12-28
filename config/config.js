@@ -100,7 +100,8 @@ let config = {
 				weatherProvider: "openweathermap",
 				type: "current",
 				location: "Arlington, MA",
-				locationID: "4929180", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				locationID: "4929180", // Arlington
+				// locationID: "5100356", //NJ
 				apiKey: "bfa59d8169bc5ea02ced090c70af8bc8",
 				showSun: false
 			}
@@ -112,7 +113,6 @@ let config = {
 			classes: 'always',
 			config: {
 				weatherProvier: "openweathermap",
-				//apiBase: 'https://api.weather.gov/points',
 				type: "forecast",
 				location: "Arlington, MA",
 				//locationID: "4929180", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
@@ -148,6 +148,7 @@ let config = {
 		{
 			module: 'calendar_monthly',
 			position: 'top_left',
+			classes: 'always',
 			config: {
 			}
 		},
@@ -232,6 +233,37 @@ let config = {
 			  tolerance: 0.5,
 			  // allow multiple concurrent user logins, 0=no, any other number is the maximum number of concurrent logins
 			  multiUser: 0,
+			}
+		},
+		{
+			module: "MMM-RAIN-MAP",
+			position: "bottom_left",
+			classes: 'mike',
+			config: {
+				animationSpeedMs: 400,
+			colorScheme: 2,
+				colorizeTime: true,
+				defaultZoomLevel: 8,
+				displayTime: true,
+				displayTimeline: true,
+				displayClockSymbol: true,
+				displayOnlyOnRain: true,
+				extraDelayLastFrameMs: 1000,
+				extraDelayCurrentFrameMs: 3000,
+				markers: [
+					{ lat: 42.42048, lng: -71.18697, color: "green" },
+				],
+				mapPositions: [
+					{ lat: 42.42048, lng: -71.18697, zoom: 9, loops: 1 }, // Arlington
+					// { lat: 40.29, lng: -74.73, zoom: 9, loops: 1 }, // NJ
+				],
+				mapUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+				mapHeight: "420px", // must be a pixel value (no percent)
+				mapWidth: "420px", // must be a pixel value (no percent)
+				maxHistoryFrames: -1,
+				maxForecastFrames: -1,
+				substitudeModules: [],
+				updateIntervalInSeconds: 300,
 			}
 		}
 	]
