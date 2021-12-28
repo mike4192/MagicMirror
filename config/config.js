@@ -271,9 +271,10 @@ let config = {
 		{
 			module: "MMM-CountUP",
 			position: "bottom_bar",
-			classes: 'mike',
+			classes: 'maggiegs',
 			config: {
-			  header: 'You\'ve known your cutie for:',
+			  header: '',
+			  title: 'You\'ve been dating your cutie for ...',
 			  date: '2018-12-02',
 			  time: '00:00:00',
 			  showFullDate: true
