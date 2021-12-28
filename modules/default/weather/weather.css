@@ -24,13 +24,28 @@
   text-align: center;
 }
 
+.weather .blank {
+  padding-left: 10px;
+  padding-right: 0;
+}
+
+.weather .rain-icon {
+  padding-left: 10px;
+  padding-right: 0;
+}
+
+.weather .snow-icon {
+  padding-left: 10px;
+  padding-right: 0;
+}
+
 .weather .min-temp {
   padding-left: 20px;
   padding-right: 0;
 }
 
 .weather .precipitation {
-  padding-left: 20px;
+  padding-left: 10px;
   padding-right: 0;
 }
 

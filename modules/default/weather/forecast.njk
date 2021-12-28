@@ -23,14 +23,43 @@
                     {{ f.minTemperature | roundValue | unit("temperature") | decimalSymbol }}
                 </td>
                 {% if config.showPrecipitationAmount %}
-                    {% if f.precipitationUnits %}
-                        <td class="align-right bright precipitation">
-                            {{ f.precipitation }}{{ f.precipitationUnits }}
-                        </td>
-		                {% else %}
-                        <td class="align-right bright precipitation">
-                            {{ f.precipitation | unit("precip") }}
-                        </td>
+                    {% if f.anyDayBothRainSnowExists %}
+                        {% if f.rainExists and f.snowExists %}
+                            <td class="align-right bright rain-icon"><span class="wi weathericon wi-raindrop"></span></td>
+                            <td class="align-right bright precipitation">
+                                {{ f.rain | unit("precip") }}
+                            </td>
+                            <td class="align-right bright snow-icon"><span class="wi weathericon wi-snowflake-cold"></span></td>
+                            <td class="align-right bright precipitation">
+                                {{ f.snow | unit("snow") }}
+                            </td>
+                        {% elif f.rainExists %}
+                            <td class="align-right bright rain-icon"><span class="wi weathericon wi-raindrop"></span></td>
+                            <td class="align-right bright precipitation">
+                                {{ f.rain | unit("precip") }}
+                            </td>
+                        {% elif f.snowExists %}
+                            <td class="align-right bright blank"></td>
+                            <td class="align-right bright precipitation">
+                                {{ "" }}
+                            </td>
+                            <td class="align-right bright rain-icon"><span class="wi weathericon wi-snowflake-cold"></span></td>
+                            <td class="align-right bright precipitation">
+                                {{ f.snow | unit("snow") }}
+                            </td>
+                        {% endif %}
+                    {% else %}
+                        {% if f.rainExists %}
+                            <td class="align-right bright rain-icon"><span class="wi weathericon wi-raindrop"></span></td>
+                            <td class="align-right bright precipitation">
+                                {{ f.rain | unit("precip") }}
+                            </td>
+                        {% else %}
+                            <td class="align-right bright rain-icon"><span class="wi weathericon wi-snowflake-cold"></span></td>
+                            <td class="align-right bright precipitation">
+                                {{ f.snow | unit("precip") }}
+                            </td>                            
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             </tr>

@@ -52,7 +52,7 @@ WeatherProvider.register("openweathermap", {
 				if (this.config.weatherEndpoint === "/onecall") {
 					const weatherData = this.generateWeatherObjectsFromOnecall(data);
 					this.setWeatherForecast(weatherData.days);
-					this.setFetchedLocation(`${data.timezone}`);
+					this.setFetchedLocation(this.config.location);
 				} else {
 					const forecast = this.generateWeatherObjectsFromForecast(data.list);
 					this.setWeatherForecast(forecast);
@@ -387,6 +387,9 @@ WeatherProvider.register("openweathermap", {
 				weather.windDirection = day.wind_deg;
 				weather.weatherType = this.convertWeatherType(day.weather[0].icon);
 				precip = false;
+				weather.snow = 0;
+				weather.rain = 0;
+				weather.anyDayBothRainSnowExists = false;
 				if (!isNaN(day.rain)) {
 					if (this.config.units === "imperial") {
 						weather.rain = day.rain / 25.4;
@@ -406,9 +409,26 @@ WeatherProvider.register("openweathermap", {
 				if (precip) {
 					weather.precipitation = weather.rain + weather.snow;
 				}
+				weather.snowExists = weather.snow > this.config.rainThreshold ? true : false;
+				weather.rainExists = weather.rain > this.config.snowThreshold ? true : false;
 
 				days.push(weather);
 				weather = new WeatherObject(this.config.units, this.config.tempUnits, this.config.windUnits, this.config.useKmh);
+			}
+			// Check if any days in the forecast has both rain and snow
+			let anyDayBothRainSnowExists = false;
+			Log.info("Length of days is: " + days.length);
+			let len = Math.min(days.length, this.config.maxNumberOfDays);
+			for (let i = 0; i < len; i++) {
+				if (days[i].rainExists && days[i].snowExists) {
+					anyDayBothRainSnowExists = true;
+					break;
+				}
+			}
+			Log.info("anyDayBothRainSnowExists is " + anyDayBothRainSnowExists);
+			for (i = 0; i < len; i++) {
+				Log.info("days[" + i + "] is undefined?: " + String(days[i] == undefined));
+				days[i].anyDayBothRainSnowExists = anyDayBothRainSnowExists;
 			}
 		}
 

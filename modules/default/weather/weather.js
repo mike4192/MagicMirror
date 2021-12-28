@@ -43,7 +43,9 @@ Module.register("weather", {
 		onlyTemp: false,
 		showPrecipitationAmount: false,
 		colored: false,
-		showFeelsLike: true
+		showFeelsLike: true,
+		rainThreshold: 0.01,
+		snowThreshold: 0.01
 	},
 
 	// Module properties.
@@ -224,7 +226,19 @@ Module.register("weather", {
 						}
 					}
 				} else if (type === "precip") {
-					if (value === null || isNaN(value) || value === 0 || value.toFixed(2) === "0.00") {
+					// Don't show precipitiation amounts less than 0.06 in
+					if (value === null || isNaN(value) || value === 0 || value.toFixed(2) === "0.00" || value < this.config.rainThreshold) {
+						value = "";
+					} else {
+						if (this.config.weatherProvider === "ukmetoffice" || this.config.weatherProvider === "ukmetofficedatahub") {
+							value += "%";
+						} else {
+							value = `${value.toFixed(2)} ${this.config.units === "imperial" ? "in" : "mm"}`;
+						}
+					}
+				} else if (type === "snow") { // Snow precipitation amount
+					// Don't show precipitiation amounts less than 0.02 in
+					if (value === null || isNaN(value) || value === 0 || value.toFixed(2) === "0.00" || value < this.config.snowThreshold) {
 						value = "";
 					} else {
 						if (this.config.weatherProvider === "ukmetoffice" || this.config.weatherProvider === "ukmetofficedatahub") {
