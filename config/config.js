@@ -279,7 +279,7 @@ let config = {
 			  time: '00:00:00',
 			  showFullDate: true
 			}
-		  },
+		},
 	]
 };
 
