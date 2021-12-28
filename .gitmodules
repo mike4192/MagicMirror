@@ -13,3 +13,6 @@
 [submodule "modules/MMM-RAIN-MAP"]
 	path = modules/MMM-RAIN-MAP
 	url = https://github.com/jalibu/MMM-RAIN-MAP.git
+[submodule "modules/MMM-CountUP"]
+	path = modules/MMM-CountUP
+	url = git@github.com:mike4192/MMM-CountUP.git
