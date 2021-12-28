@@ -124,7 +124,9 @@ let config = {
 				maxNumberOfDays: 8,
 				maxEntries: 8,
 				fadePoint: 0.80,
-				showPrecipitationAmount: true
+				showPrecipitationAmount: true,
+				rainThreshold: 0.1,
+				snowThreshold: 0.05
 			}
 		},
 		{
