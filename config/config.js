@@ -36,6 +36,7 @@ let config = {
 	logLevel: ["INFO", "LOG", "WARN", "ERROR"], // Add "DEBUG" for even more logging
 	timeFormat: 12,
 	units: "imperial",
+	
 	// serverOnly:  true/false/"local" ,
 	// local for armv6l processors, default
 	//   starts serveronly and then starts chrome browser
@@ -66,15 +67,27 @@ let config = {
 		},
 		{
 			module: "calendar",
-			header: "US Holidays",
+			header: "Mike's Calendar",
 			position: "top_left",
 			classes: 'always',
 			config: {
-				maximmEntries: 4,
+				maximumEntries: 5,
+				showEnd: false,
+				timeFormat: "absolute",
+				dateFormat: "ddd MMM Do",
+				urgency: 1,
+				fullDayEventDateFormat: "ddd MMM Do",
+				fade: true,
+				fadePoint: 0.5,
+				fetchInterval: 3600000, //1 hr in ms
 				calendars: [
 					{
 						symbol: "calendar-check",
-						url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics"
+						url: "https://calendar.google.com/calendar/ical/michael.romanko%40gmail.com/private-f5fde1505f454e0b2c1ae1039ec5a90f/basic.ics"
+					},
+					{
+						symbol: "calendar-day",
+						url: "https://calendar.google.com/calendar/ical/en.usa%23holiday%40group.v.calendar.google.com/public/basic.ics"
 					}
 				]
 			}
@@ -88,7 +101,8 @@ let config = {
 				type: "current",
 				location: "Arlington, MA",
 				locationID: "4929180", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-				apiKey: "bfa59d8169bc5ea02ced090c70af8bc8"
+				apiKey: "bfa59d8169bc5ea02ced090c70af8bc8",
+				showSun: false
 			}
 		},
 		{
@@ -107,8 +121,8 @@ let config = {
 				lon: -71.18697,
 				roundTemp: true,
 				weatherEndpoint: '/onecall',
-				maxNumberOfDays: 10,
-				maxEntries: 10,
+				maxNumberOfDays: 8,
+				maxEntries: 8,
 				fadePoint: 0.80,
 				showPrecipitationAmount: true
 			}
@@ -129,6 +143,12 @@ let config = {
 				broadcastNewsFeeds: false,
 				broadcastNewsUpdates: false,
 				reloadInterval: 7200000
+			}
+		},
+		{
+			module: 'calendar_monthly',
+			position: 'top_left',
+			config: {
 			}
 		},
 		{
