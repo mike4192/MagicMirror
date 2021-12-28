@@ -130,7 +130,7 @@ let config = {
 		{
 			module: "newsfeed",
 			position: "bottom_bar",
-			classes: 'always',
+			classes: 'default',
 			config: {
 				feeds: [
 					{
@@ -265,7 +265,18 @@ let config = {
 				substitudeModules: [],
 				updateIntervalInSeconds: 300,
 			}
-		}
+		},
+		{
+			module: "MMM-CountUP",
+			position: "bottom_bar",
+			classes: 'mike',
+			config: {
+			  header: 'You\'ve known your cutie for:',
+			  date: '2018-12-02',
+			  time: '00:00:00',
+			  showFullDate: true
+			}
+		  },
 	]
 };
 
