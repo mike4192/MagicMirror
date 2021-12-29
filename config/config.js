@@ -160,7 +160,7 @@ let config = {
 				sensorPin: 17,
 				sensorState: 1,
 				powerSaving: true,
-				powerSavingDelay: 120,
+				powerSavingDelay: 90,
 			}
 		},
 		{
@@ -170,8 +170,8 @@ let config = {
 			config: {
 			  url: 'https://www.wunderground.com/forecast/us/ma/arlington/42.42,-71.17',
 			  width: '950px',
-			  height: '410px',
-			  loadedJS: 'scroll(0,460);',
+			  height: '450px',
+			  loadedJS: 'scroll(0,410);',
 			  autoRefresh: true,
 			  autoRefreshInterval: 3*60*60*1000
 			},
@@ -184,7 +184,7 @@ let config = {
 			  logoutDelay: 20000,
 			  // How often the recognition starts in milliseconds
 			  // With a Raspberry Pi 3+ it works well every 2 seconds
-			  checkInterval: 1000,
+			  checkInterval: 500,
 			  // Module set used for when there is no face detected ie no one is in front of the camera
 			  noFaceClass: 'noface',
 			  // Module set used for when there is an unknown/unrecognised face detected
@@ -239,7 +239,7 @@ let config = {
 		},
 		{
 			module: "MMM-RAIN-MAP",
-			position: "bottom_left",
+			position: "lower_third",
 			classes: 'mike',
 			config: {
 				animationSpeedMs: 400,
@@ -271,7 +271,7 @@ let config = {
 		{
 			module: "MMM-CountUP",
 			position: "bottom_bar",
-			classes: 'maggiegs',
+			classes: 'maggie',
 			config: {
 			  header: '',
 			  title: 'You\'ve been dating your cutie for ...',
