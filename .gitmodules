@@ -9,7 +9,7 @@
 	url = https://github.com/paviro/MMM-PIR-Sensor
 [submodule "modules/calendar_monthly"]
 	path = modules/calendar_monthly
-	url = https://github.com/KirAsh4/calendar_monthly
+	url = https://github.com/d-Rickyy-b/calendar_monthly.git 
 [submodule "modules/MMM-RAIN-MAP"]
 	path = modules/MMM-RAIN-MAP
 	url = https://github.com/jalibu/MMM-RAIN-MAP.git
