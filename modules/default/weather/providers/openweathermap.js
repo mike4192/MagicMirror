@@ -409,15 +409,17 @@ WeatherProvider.register("openweathermap", {
 				if (precip) {
 					weather.precipitation = weather.rain + weather.snow;
 				}
-				weather.snowExists = weather.snow > this.config.rainThreshold ? true : false;
-				weather.rainExists = weather.rain > this.config.snowThreshold ? true : false;
+
+				
+				weather.snowExists = weather.snow > this.config.snowThreshold ? true : false;
+				weather.rainExists = weather.rain > this.config.rainThreshold ? true : false;
 
 				days.push(weather);
 				weather = new WeatherObject(this.config.units, this.config.tempUnits, this.config.windUnits, this.config.useKmh);
 			}
 			// Check if any days in the forecast has both rain and snow
 			let anyDayBothRainSnowExists = false;
-			Log.info("Length of days is: " + days.length);
+			// Log.info("Length of days is: " + days.length);
 			let len = Math.min(days.length, this.config.maxNumberOfDays);
 			for (let i = 0; i < len; i++) {
 				if (days[i].rainExists && days[i].snowExists) {
@@ -427,7 +429,7 @@ WeatherProvider.register("openweathermap", {
 			}
 			Log.info("anyDayBothRainSnowExists is " + anyDayBothRainSnowExists);
 			for (i = 0; i < len; i++) {
-				Log.info("days[" + i + "] is undefined?: " + String(days[i] == undefined));
+				// Log.info("days[" + i + "] is undefined?: " + String(days[i] == undefined));
 				days[i].anyDayBothRainSnowExists = anyDayBothRainSnowExists;
 			}
 		}

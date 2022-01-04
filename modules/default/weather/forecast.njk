@@ -57,7 +57,7 @@
                         {% elif f.snowExists %}
                             <td class="align-right bright rain-icon"><span class="wi weathericon wi-snowflake-cold"></span></td>
                             <td class="align-right bright precipitation">
-                                {{ f.snow | unit("precip") }}
+                                {{ f.snow | unit("snow") }}
                             </td>                            
                         {% endif %}
                     {% endif %}
