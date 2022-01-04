@@ -36,12 +36,6 @@ let config = {
 	logLevel: ["INFO", "LOG", "WARN", "ERROR"], // Add "DEBUG" for even more logging
 	timeFormat: 12,
 	units: "imperial",
-	
-	// serverOnly:  true/false/"local" ,
-	// local for armv6l processors, default
-	//   starts serveronly and then starts chrome browser
-	// false, default for all NON-armv6l devices
-	// true, force serveronly mode, because you want to.. no UI on this device
 
 	modules: [
 		{
@@ -71,7 +65,7 @@ let config = {
 			position: "top_left",
 			classes: 'always',
 			config: {
-				maximumEntries: 5,
+				maximumEntries: 6,
 				showEnd: false,
 				timeFormat: "absolute",
 				dateFormat: "ddd MMM Do",
@@ -144,7 +138,7 @@ let config = {
 				showPublishDate: true,
 				broadcastNewsFeeds: false,
 				broadcastNewsUpdates: false,
-				reloadInterval: 7200000
+				reloadInterval: 3600000
 			}
 		},
 		{
@@ -171,7 +165,7 @@ let config = {
 			  url: 'https://www.wunderground.com/forecast/us/ma/arlington/42.42,-71.17',
 			  width: '950px',
 			  height: '450px',
-			  loadedJS: 'scroll(0,410);',
+			  loadedJS: 'scroll(0,445);',
 			  autoRefresh: true,
 			  autoRefreshInterval: 3*60*60*1000
 			},
@@ -243,7 +237,7 @@ let config = {
 			classes: 'mike',
 			config: {
 				animationSpeedMs: 400,
-			colorScheme: 2,
+				colorScheme: 1,
 				colorizeTime: true,
 				defaultZoomLevel: 8,
 				displayTime: true,
@@ -256,8 +250,8 @@ let config = {
 					{ lat: 42.42048, lng: -71.18697, color: "green" },
 				],
 				mapPositions: [
-					{ lat: 42.42048, lng: -71.18697, zoom: 9, loops: 1 }, // Arlington
-					// { lat: 40.29, lng: -74.73, zoom: 9, loops: 1 }, // NJ
+					{ lat: 42.42048, lng: -71.18697, zoom: 8, loops: 1 }, // Arlington
+					// { lat: 40.29, lng: -74.73, zoom: 8, loops: 1 }, // NJ
 				],
 				mapUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 				mapHeight: "420px", // must be a pixel value (no percent)
