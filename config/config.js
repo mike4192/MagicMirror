@@ -86,41 +86,60 @@ let config = {
 				]
 			}
 		},
+		// {
+		// 	module: "weather",
+		// 	position: "top_right",
+		// 	classes: 'always',
+		// 	config: {
+		// 		weatherProvider: "openweathermap",
+		// 		type: "current",
+		// 		location: "Arlington, MA",
+		// 		locationID: "4929180", // Arlington
+		// 		// locationID: "5100356", //NJ
+		// 		apiKey: "bfa59d8169bc5ea02ced090c70af8bc8",
+		// 		showSun: false
+		// 	}
+		// },
+		// {
+		// 	module: "weather",
+		// 	position: "top_right",
+		// 	header: "Weather Forecast",
+		// 	classes: 'always',
+		// 	config: {
+		// 		weatherProvier: "openweathermap",
+		// 		type: "forecast",
+		// 		location: "Arlington, MA",
+		// 		//locationID: "4929180", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+		// 		apiKey: "bfa59d8169bc5ea02ced090c70af8bc8",
+		// 		lat: 42.42048,
+		// 		lon: -71.18697,
+		// 		roundTemp: true,
+		// 		weatherEndpoint: '/onecall',
+		// 		maxNumberOfDays: 8,
+		// 		maxEntries: 8,
+		// 		fadePoint: 0.80,
+		// 		showPrecipitationAmount: true,
+		// 		rainThreshold: 0.1,
+		// 		snowThreshold: 0.05
+		// 	}
+		// },
 		{
-			module: "weather",
+			module: "MMM-OpenWeatherMapForecast",
 			position: "top_right",
+			header: "",
 			classes: 'always',
 			config: {
-				weatherProvider: "openweathermap",
-				type: "current",
-				location: "Arlington, MA",
-				locationID: "4929180", // Arlington
-				// locationID: "5100356", //NJ
-				apiKey: "bfa59d8169bc5ea02ced090c70af8bc8",
-				showSun: false
-			}
-		},
-		{
-			module: "weather",
-			position: "top_right",
-			header: "Weather Forecast",
-			classes: 'always',
-			config: {
-				weatherProvier: "openweathermap",
-				type: "forecast",
-				location: "Arlington, MA",
-				//locationID: "4929180", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-				apiKey: "bfa59d8169bc5ea02ced090c70af8bc8",
-				lat: 42.42048,
-				lon: -71.18697,
-				roundTemp: true,
-				weatherEndpoint: '/onecall',
-				maxNumberOfDays: 8,
-				maxEntries: 8,
-				fadePoint: 0.80,
-				showPrecipitationAmount: true,
-				rainThreshold: 0.1,
-				snowThreshold: 0.05
+				apikey: "bfa59d8169bc5ea02ced090c70af8bc8",
+				latitude: "42.42048",
+				longitude: "-71.18697",
+				showCurrentConditions: true,
+				forecastHeaderText: "Arlington, MA Forecast",
+				maxDailiesToShow: 3,
+				concise: true,
+				forecastLayout: "tiled",
+				useAnimatedIcons: true,
+				requestDelay: 500,
+				units: "imperial"
 			}
 		},
 		{
