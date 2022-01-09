@@ -63,7 +63,7 @@ let config = {
 			module: "calendar",
 			header: "Mike's Calendar",
 			position: "top_left",
-			classes: 'always',
+			classes: 'default mike',
 			config: {
 				maximumEntries: 6,
 				showEnd: false,
@@ -83,6 +83,29 @@ let config = {
 						symbol: "calendar-day",
 						url: "https://calendar.google.com/calendar/ical/en.usa%23holiday%40group.v.calendar.google.com/public/basic.ics"
 					}
+				]
+			}
+		},
+		{
+			module: "calendar",
+			header: "Maggies's Calendar",
+			position: "top_left",
+			classes: 'maggie',
+			config: {
+				maximumEntries: 6,
+				showEnd: false,
+				timeFormat: "absolute",
+				dateFormat: "ddd MMM Do",
+				urgency: 1,
+				fullDayEventDateFormat: "ddd MMM Do",
+				fade: true,
+				fadePoint: 0.5,
+				fetchInterval: 3600000, //1 hr in ms
+				calendars: [
+					{
+						symbol: "calendar-check",
+						url: "https://calendar.google.com/calendar/ical/mmaggie12%40gmail.com/private-3cca029b1549cd2979e98a2bc93aa59d/basic.ics"
+					},
 				]
 			}
 		},
