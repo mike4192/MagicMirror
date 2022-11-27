@@ -8,6 +8,12 @@ const Log = require("logger");
 let config = process.env.config ? JSON.parse(process.env.config) : {};
 // Module to control application life.
 const app = electron.app;
+// If ELECTRON_DISABLE_GPU is set electron is started with --disable-gpu flag.
+// See https://www.electronjs.org/docs/latest/tutorial/offscreen-rendering for more info.
+if (process.env.ELECTRON_DISABLE_GPU !== undefined) {
+	app.disableHardwareAcceleration();
+}
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
@@ -53,7 +59,7 @@ function createWindow() {
 	// If config.address is not defined or is an empty string (listening on all interfaces), connect to localhost
 
 	let prefix;
-	if (config["tls"] !== null && config["tls"]) {
+	if ((config["tls"] !== null && config["tls"]) || config.useHttps) {
 		prefix = "https://";
 	} else {
 		prefix = "http://";
@@ -138,6 +144,13 @@ app.on("before-quit", (event) => {
 	}, 3000); // Force-quit after 3 seconds.
 	core.stop();
 	process.exit(0);
+});
+
+/* handle errors from self signed certificates */
+
+app.on("certificate-error", (event, webContents, url, error, certificate, callback) => {
+	event.preventDefault();
+	callback(true);
 });
 
 // Start the core application if server is run on localhost

@@ -1,9 +1,9 @@
-/* Magic Mirror Test config current weather compliments
+/* MagicMirror² Test config current weather compliments
  *
  * By rejas https://github.com/rejas
  * MIT Licensed.
  */
-let config = require(process.cwd() + "/tests/configs/default.js").configFactory({
+let config = {
 	modules: [
 		{
 			module: "compliments",
@@ -12,7 +12,7 @@ let config = require(process.cwd() + "/tests/configs/default.js").configFactory(
 				compliments: {
 					snow: ["snow"]
 				},
-				updateInterval: 4000
+				updateInterval: 3000
 			}
 		},
 		{
@@ -20,12 +20,11 @@ let config = require(process.cwd() + "/tests/configs/default.js").configFactory(
 			position: "bottom_bar",
 			config: {
 				location: "Munich",
-				apiKey: "fake key",
-				initialLoadDelay: 3000
+				mockData: '"#####WEATHERDATA#####"'
 			}
 		}
 	]
-});
+};
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/
 if (typeof module !== "undefined") {

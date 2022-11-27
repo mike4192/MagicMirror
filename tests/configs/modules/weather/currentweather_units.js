@@ -1,9 +1,9 @@
-/* Magic Mirror Test config default weather
+/* MagicMirror² Test config default weather
  *
  * By fewieden https://github.com/fewieden
  * MIT Licensed.
  */
-let config = require(process.cwd() + "/tests/configs/default.js").configFactory({
+let config = {
 	units: "imperial",
 
 	modules: [
@@ -12,14 +12,13 @@ let config = require(process.cwd() + "/tests/configs/default.js").configFactory(
 			position: "bottom_bar",
 			config: {
 				location: "Munich",
-				apiKey: "fake key",
-				initialLoadDelay: 3000,
+				mockData: '"#####WEATHERDATA#####"',
 				decimalSymbol: ",",
 				showHumidity: true
 			}
 		}
 	]
-});
+};
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/
 if (typeof module !== "undefined") {

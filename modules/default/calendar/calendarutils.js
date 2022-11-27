@@ -1,4 +1,4 @@
-/* Magic Mirror
+/* MagicMirror²
  * Calendar Util Methods
  *
  * By Michael Teeuw https://michaelteeuw.nl
@@ -98,7 +98,7 @@ const CalendarUtils = {
 				if (h > 0 && h < Math.abs(current_offset) / 60) {
 					// if so, rrule created a wrong date (utc day, oops, with utc yesterday adjusted time)
 					// we need to fix that
-					adjustHours = 24;
+					//adjustHours = 24;
 					// Log.debug("adjusting date")
 				}
 				//-300 > -240
@@ -160,7 +160,7 @@ const CalendarUtils = {
 			}
 
 			if (event.type === "VEVENT") {
-				Log.debug("\nEvent: " + JSON.stringify(event));
+				Log.debug("Event:\n" + JSON.stringify(event));
 				let startDate = eventDate(event, "start");
 				let endDate;
 
@@ -177,8 +177,8 @@ const CalendarUtils = {
 					}
 				}
 
-				Log.debug("startDate (local): " + startDate.toDate());
-				Log.debug("endDate (local): " + endDate.toDate());
+				Log.debug("start: " + startDate.toDate());
+				Log.debug("end:: " + endDate.toDate());
 
 				// Calculate the duration of the event for use with recurring events.
 				let duration = parseInt(endDate.format("x")) - parseInt(startDate.format("x"));
@@ -332,40 +332,47 @@ const CalendarUtils = {
 							Log.debug("Fullday");
 							// If the offset is negative (east of GMT), where the problem is
 							if (dateoffset < 0) {
-								// Remove the offset, independently of the comparison between the date hour and the offset,
-								// since in the case that *date houre < offset*, the *new Date* command will handle this by
-								// representing the day before.
-
-								// Reduce the time by the offset:
-								// Apply the correction to the date/time to get it UTC relative
-								date = new Date(date.getTime() - Math.abs(nowOffset) * 60000);
-								// the duration was calculated way back at the top before we could correct the start time..
-								// fix it for this event entry
-								//duration = 24 * 60 * 60 * 1000;
-								Log.debug("new recurring date1 is " + date);
+								if (dh < Math.abs(dateoffset / 60)) {
+									// if the rrule byweekday WAS explicitly set , correct it
+									// reduce the time by the offset
+									if (curEvent.rrule.origOptions.byweekday !== undefined) {
+										// Apply the correction to the date/time to get it UTC relative
+										date = new Date(date.getTime() - Math.abs(24 * 60) * 60000);
+									}
+									// the duration was calculated way back at the top before we could correct the start time..
+									// fix it for this event entry
+									//duration = 24 * 60 * 60 * 1000;
+									Log.debug("new recurring date1 fulldate is " + date);
+								}
 							} else {
 								// if the timezones are the same, correct date if needed
-								if (event.start.tz === moment.tz.guess()) {
-									// if the date hour is less than the offset
-									if (24 - dh < Math.abs(dateoffset / 60)) {
+								//if (event.start.tz === moment.tz.guess()) {
+								// if the date hour is less than the offset
+								if (24 - dh <= Math.abs(dateoffset / 60)) {
+									// if the rrule byweekday WAS explicitly set , correct it
+									if (curEvent.rrule.origOptions.byweekday !== undefined) {
 										// apply the correction to the date/time back to right day
 										date = new Date(date.getTime() + Math.abs(24 * 60) * 60000);
-										// the duration was calculated way back at the top before we could correct the start time..
-										// fix it for this event entry
-										//duration = 24 * 60 * 60 * 1000;
-										Log.debug("new recurring date2 is " + date);
 									}
+									// the duration was calculated way back at the top before we could correct the start time..
+									// fix it for this event entry
+									//duration = 24 * 60 * 60 * 1000;
+									Log.debug("new recurring date2 fulldate is " + date);
 								}
+								//}
 							}
 						} else {
 							// not full day, but luxon can still screw up the date on the rule processing
 							// we need to correct the date to get back to the right event for
 							if (dateoffset < 0) {
 								// if the date hour is less than the offset
-								if (dh < Math.abs(dateoffset / 60)) {
-									// Reduce the time by the offset:
-									// Apply the correction to the date/time to get it UTC relative
-									date = new Date(date.getTime() - Math.abs(nowOffset) * 60000);
+								if (dh <= Math.abs(dateoffset / 60)) {
+									// if the rrule byweekday WAS explicitly set , correct it
+									if (curEvent.rrule.origOptions.byweekday !== undefined) {
+										// Reduce the time by t:
+										// Apply the correction to the date/time to get it UTC relative
+										date = new Date(date.getTime() - Math.abs(24 * 60) * 60000);
+									}
 									// the duration was calculated way back at the top before we could correct the start time..
 									// fix it for this event entry
 									//duration = 24 * 60 * 60 * 1000;
@@ -373,21 +380,24 @@ const CalendarUtils = {
 								}
 							} else {
 								// if the timezones are the same, correct date if needed
-								if (event.start.tz === moment.tz.guess()) {
-									// if the date hour is less than the offset
-									if (24 - dh < Math.abs(dateoffset / 60)) {
+								//if (event.start.tz === moment.tz.guess()) {
+								// if the date hour is less than the offset
+								if (24 - dh <= Math.abs(dateoffset / 60)) {
+									// if the rrule byweekday WAS explicitly set , correct it
+									if (curEvent.rrule.origOptions.byweekday !== undefined) {
 										// apply the correction to the date/time back to right day
 										date = new Date(date.getTime() + Math.abs(24 * 60) * 60000);
-										// the duration was calculated way back at the top before we could correct the start time..
-										// fix it for this event entry
-										//duration = 24 * 60 * 60 * 1000;
-										Log.debug("new recurring date2 is " + date);
 									}
+									// the duration was calculated way back at the top before we could correct the start time..
+									// fix it for this event entry
+									//duration = 24 * 60 * 60 * 1000;
+									Log.debug("new recurring date2 is " + date);
 								}
+								//}
 							}
 						}
 						startDate = moment(date);
-						Log.debug("Corrected startDate (local): " + startDate.toDate());
+						Log.debug("Corrected startDate: " + startDate.toDate());
 
 						let adjustDays = CalendarUtils.calculateTimezoneAdjustment(event, date);
 
@@ -471,10 +481,6 @@ const CalendarUtils = {
 						return;
 					}
 
-					// Adjust start date so multiple day events will be displayed as happening today even though they started some days ago already
-					if (fullDayEvent && startDate <= today) {
-						startDate = moment(today);
-					}
 					// if the start and end are the same, then make end the 'end of day' value (start is at 00:00:00)
 					if (fullDayEvent && startDate.format("x") === endDate.format("x")) {
 						endDate = endDate.endOf("day");
@@ -500,23 +506,7 @@ const CalendarUtils = {
 			return a.startDate - b.startDate;
 		});
 
-		// include up to maximumEntries current or upcoming events
-		// If past events should be included, include all past events
-		const now = moment();
-		let entries = 0;
-		let events = [];
-		for (let ne of newEvents) {
-			if (moment(ne.endDate, "x").isBefore(now)) {
-				if (config.includePastEvents) events.push(ne);
-				continue;
-			}
-			entries++;
-			// If max events has been saved, skip the rest
-			if (entries > config.maximumEntries) break;
-			events.push(ne);
-		}
-
-		return events;
+		return newEvents;
 	},
 
 	/**
