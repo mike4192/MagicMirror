@@ -19,3 +19,6 @@
 [submodule "modules/MMM-OpenWeatherMapForecast"]
 	path = modules/MMM-OpenWeatherMapForecast
 	url = https://github.com/MarcLandis/MMM-OpenWeatherMapForecast.git
+[submodule "modules/MMM-CountDown"]
+	path = modules/MMM-CountDown
+	url = git@github.com:daterrell/MMM-CountDown.git
