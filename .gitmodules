@@ -22,3 +22,6 @@
 [submodule "modules/MMM-CountDown"]
 	path = modules/MMM-CountDown
 	url = git@github.com:daterrell/MMM-CountDown.git
+[submodule "modules/MMM-OpenWeatherForecast"]
+	path = modules/MMM-OpenWeatherForecast
+	url = git@github.com:mike4192/MMM-OpenWeatherForecast.git
