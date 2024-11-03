@@ -109,45 +109,8 @@ let config = {
 				]
 			}
 		},
-		// {
-		// 	module: "weather",
-		// 	position: "top_right",
-		// 	classes: 'always',
-		// 	config: {
-		// 		weatherProvider: "openweathermap",
-		// 		type: "current",
-		// 		location: "Arlington, MA",
-		// 		locationID: "4929180", // Arlington
-		// 		// locationID: "5100356", //NJ
-		// 		apiKey: "bfa59d8169bc5ea02ced090c70af8bc8",
-		// 		showSun: false
-		// 	}
-		// },
-		// {
-		// 	module: "weather",
-		// 	position: "top_right",
-		// 	header: "Weather Forecast",
-		// 	classes: 'always',
-		// 	config: {
-		// 		weatherProvier: "openweathermap",
-		// 		type: "forecast",
-		// 		location: "Arlington, MA",
-		// 		//locationID: "4929180", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-		// 		apiKey: "bfa59d8169bc5ea02ced090c70af8bc8",
-		// 		lat: 42.42048,
-		// 		lon: -71.18697,
-		// 		roundTemp: true,
-		// 		weatherEndpoint: '/onecall',
-		// 		maxNumberOfDays: 8,
-		// 		maxEntries: 8,
-		// 		fadePoint: 0.80,
-		// 		showPrecipitationAmount: true,
-		// 		rainThreshold: 0.1,
-		// 		snowThreshold: 0.05
-		// 	}
-		// },
 		{
-			module: "MMM-OpenWeatherMapForecast",
+			module: "MMM-OpenWeatherForecast",
 			position: "top_right",
 			header: "",
 			classes: 'always',
@@ -155,32 +118,15 @@ let config = {
 				apikey: "bfa59d8169bc5ea02ced090c70af8bc8",
 				latitude: "42.42048",
 				longitude: "-71.18697",
+				units: "imperial",
+				concise: true,
+				useAnimatedIcons: true,
+				animateMainIconOnly: true,
+				requestDelay: 500,
 				showCurrentConditions: true,
 				forecastHeaderText: "Arlington, MA Forecast",
-				maxDailiesToShow: 3,
-				concise: true,
 				forecastLayout: "tiled",
-				useAnimatedIcons: true,
-				requestDelay: 500,
-				units: "imperial"
-			}
-		},
-		{
-			module: "newsfeed",
-			position: "bottom_bar",
-			classes: 'default',
-			config: {
-				feeds: [
-					{
-						title: "New York Times",
-						url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-					}
-				],
-				showSourceTitle: true,
-				showPublishDate: true,
-				broadcastNewsFeeds: false,
-				broadcastNewsUpdates: false,
-				reloadInterval: 3600000
+				maxDailiesToShow: 3
 			}
 		},
 		{
@@ -190,15 +136,15 @@ let config = {
 			config: {
 			}
 		},
-		{
-			module: 'MMM-PIR-Sensor',
-			config: {
-				sensorPin: 17,
-				sensorState: 1,
-				powerSaving: true,
-				powerSavingDelay: 90,
-			}
-		},
+		// {
+		// 	module: 'MMM-PIR-Sensor',
+		// 	config: {
+		// 		sensorPin: 17,
+		// 		sensorState: 1,
+		// 		powerSaving: true,
+		// 		powerSavingDelay: 90,
+		// 	}
+		// },
 		{
 			module: 'MMM-WebView',
 			position: 'bottom_center',
@@ -256,7 +202,7 @@ let config = {
 			  animationSpeed: 1000,
 			  // Path to Python to run the face recognition
 			  // null or '' means default path
-			  pythonPath: '/home/pi/.local/bin/.virtualenvs/cv/bin/python3',
+			  pythonPath: '/home/pi/python-facereco/bin/python3',
 			  // Should a welcome message be shown using the MagicMirror alerts module?
 			  welcomeMessage: true,
 			  // Dictionary for person name mapping in welcome message
@@ -268,7 +214,7 @@ let config = {
 			  // If extendDataset is true, you need to set the full path of the dataset
 			  dataset: 'modules/MMM-Face-Reco-DNN/dataset/',
 			  // How much distance between faces to consider it a match. Lower is more strict.
-			  tolerance: 0.5,
+			  tolerance: 0.42,
 			  // allow multiple concurrent user logins, 0=no, any other number is the maximum number of concurrent logins
 			  multiUser: 0,
 			}
@@ -285,7 +231,7 @@ let config = {
 				displayTime: true,
 				displayTimeline: true,
 				displayClockSymbol: true,
-				displayOnlyOnRain: true,
+				displayHoursBeforeRain: 0,
 				extraDelayLastFrameMs: 1000,
 				extraDelayCurrentFrameMs: 3000,
 				markers: [
@@ -295,7 +241,6 @@ let config = {
 					{ lat: 42.42048, lng: -71.18697, zoom: 8, loops: 1 }, // Arlington
 					// { lat: 40.29, lng: -74.73, zoom: 8, loops: 1 }, // NJ
 				],
-				mapUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 				mapHeight: "420px", // must be a pixel value (no percent)
 				mapWidth: "420px", // must be a pixel value (no percent)
 				maxHistoryFrames: -1,
@@ -310,12 +255,22 @@ let config = {
 			classes: 'maggie',
 			config: {
 			  header: '',
-			  title: 'You\'ve been dating your cutie for ...',
+			  title: 'You\'ve been seeing your cutie for ...',
 			  date: '2018-12-02',
 			  time: '00:00:00',
 			  showFullDate: true
 			}
 		},
+	//	{
+	//		module: "MMM-CountDown",
+	//		position: "bottom_center",
+	//		classes: "always",
+	//		config: {
+	//			event: "Romanko-Mathieu Wedding",
+	//			date: "2023-05-29",
+	//			allowNegative: true
+	//		}
+	//	}
 	]
 };
 
